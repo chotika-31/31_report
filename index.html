@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ต้นแบบระบบแจ้งเบาะแสแบบนิรนามของ BBU">
+  <title>BBU | แจ้งเรื่องนิรนาม</title>
+  <link rel="icon" href="BBU.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="browser-store.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#content">ข้ามไปยังเนื้อหา</a>
+  <header class="topbar">
+    <div class="wrap header-inner">
+      <a class="brand" href="#report" aria-label="BBU หน้าส่งเรื่อง">
+        <img src="BBU.jpg" alt="" width="44" height="44">
+        <span><strong>BBU</strong><span>ระบบแจ้งเบาะแสในโรงเรียน</span></span>
+      </a>
+      <nav aria-label="เมนูหลัก">
+        <a href="#report" aria-current="page">แจ้งเรื่อง</a>
+        <a href="#track">ติดตามเรื่อง</a>
+        <a href="#staff">เจ้าหน้าที่</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="content" tabindex="-1">
+    <div class="demo" role="note"><strong>โหมดทดลอง</strong><span id="storage-note">ใช้ข้อมูลสมมติเท่านั้น เรื่องที่ส่งจะเก็บในชีตกลางของ BBU</span></div>
+
+    <section class="view" id="report" aria-labelledby="report-title">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="hero-label"><span></span> ช่องทางรับแจ้งเรื่องของ BBU</p>
+          <h1 id="report-title" tabindex="-1">แจ้งเรื่องได้<br><em>โดยไม่ต้องระบุชื่อ</em></h1>
+          <p>ทดลองเล่าเหตุการณ์สมมติในโรงเรียน ตั้งแต่ส่งเรื่องจนถึงติดตามสถานะ</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-outer"></div><div class="orbit orbit-inner"></div>
+          <div class="shield"><svg viewBox="0 0 64 64" fill="none"><path d="M32 6c7 5 13 7 22 9v15c0 13-9 23-22 29C19 53 10 43 10 30V15c9-2 15-4 22-9Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="23" y="28" width="18" height="15" rx="3" stroke="currentColor" stroke-width="3"/><path d="M27 28v-4a5 5 0 1 1 10 0v4m-5 6v3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+
+      <div class="report-layout">
+        <div class="card form-card">
+          <h2>แบบฟอร์มแจ้งเรื่อง</h2>
+          <p class="muted">กรอกช่องที่มีเครื่องหมาย <span class="required">*</span> เพื่อส่งเรื่อง</p>
+          <form id="report-form">
+            <div class="field">
+              <label for="category">ประเภทเรื่อง <span class="required" aria-hidden="true">*</span></label>
+              <select name="category" id="category" required>
+                <option value="">เลือกประเภทเรื่อง</option>
+                <option>การกลั่นแกล้งหรือคุกคาม</option>
+                <option>การทะเลาะวิวาทหรือความรุนแรง</option>
+                <option>บุหรี่ไฟฟ้าและสารเสพติด</option>
+                <option>โรคติดต่อหรือการแพร่ระบาด</option>
+                <option>อุบัติเหตุหรือจุดเสี่ยงในโรงเรียน</option>
+                <option>ทรัพย์สินสูญหายหรือเสียหาย</option>
+                <option>สุขภาพใจและความเป็นอยู่</option>
+                <option>พฤติกรรมเสี่ยงอื่น ๆ</option>
+                <option>อื่น ๆ / ไม่แน่ใจ</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="details">เกิดอะไรขึ้น <span class="required" aria-hidden="true">*</span></label>
+              <textarea name="details" id="details" maxlength="1000" rows="4" placeholder="เล่าสิ่งที่เห็นหรือทราบเกี่ยวกับเหตุการณ์" aria-describedby="details-hint details-error" required></textarea>
+              <div class="field-meta"><span id="details-hint">เว้นชื่อจริงและข้อมูลที่ระบุตัวบุคคลได้</span><span id="count">0 / 1,000</span></div>
+              <p class="error" id="details-error" hidden>กรุณาเล่ารายละเอียดของเหตุการณ์</p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="place">สถานที่ <small>ไม่บังคับ</small></label>
+                <input name="place" id="place" maxlength="120" placeholder="เช่น บริเวณโรงอาหาร">
+              </div>
+              <div class="field">
+                <label for="when">วันหรือช่วงเวลา <small>ไม่บังคับ</small></label>
+                <input name="when" id="when" maxlength="120" placeholder="เช่น พักกลางวันวันจันทร์">
+              </div>
+            </div>
+            <p class="error" id="report-error" role="alert" hidden></p>
+            <button class="button primary" type="submit">ส่งเรื่องนิรนาม</button>
+          </form>
+        </div>
+
+        <aside class="support" aria-label="ข้อมูลก่อนส่งเรื่อง">
+          <div class="card info">
+            <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></svg></div>
+            <h2>ความเป็นส่วนตัว</h2>
+            <p>ฟอร์มไม่ขอชื่อ เลขนักเรียน อีเมล หรือเบอร์โทร</p>
+            <p id="storage-privacy">หน้าเจ้าหน้าที่ต้องใส่รหัสทดลองก่อนเปิดดูเรื่องในระบบ</p>
+          </div>
+          <div class="card info follow">
+            <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg></div>
+            <h2>ส่งเรื่องไปแล้ว?</h2>
+            <p>ใช้รหัสที่ได้รับหลังส่งเรื่องเพื่อตรวจสอบสถานะ</p>
+            <a class="button secondary" href="#track">ติดตามเรื่อง</a>
+          </div>
+          <p class="urgent"><strong>ต้องการความช่วยเหลือทันที</strong><br>ให้แจ้งครูหรือผู้ใหญ่ที่ไว้ใจได้โดยตรง</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view narrow" id="received" aria-labelledby="received-title" hidden>
+      <div class="card panel">
+        <p class="section-label">แจ้งเรื่อง</p>
+        <h1 id="received-title" tabindex="-1">ส่งเรื่องสำเร็จ</h1>
+        <p class="muted" id="receipt-hint">เก็บรหัสนี้ไว้เพื่อติดตามสถานะจากอุปกรณ์ใดก็ได้</p>
+        <label for="receipt-code">รหัสติดตามเรื่อง</label>
+        <div class="code-row"><input id="receipt-code" class="code" readonly><button class="button secondary" type="button" id="copy-code">คัดลอกรหัส</button></div>
+        <p id="copy-status" class="feedback" role="status"></p>
+        <div class="actions"><a class="button primary" href="#track" id="track-receipt">ติดตามเรื่องนี้</a><a class="button secondary" href="#report">กลับไปหน้าฟอร์ม</a></div>
+      </div>
+    </section>
+
+    <section class="view narrow" id="track" aria-labelledby="track-title" hidden>
+      <div class="card panel">
+        <p class="section-label">ตรวจสอบสถานะ</p>
+        <h1 id="track-title" tabindex="-1">ติดตามเรื่อง</h1>
+        <p class="muted">กรอกรหัสที่ได้รับหลังส่งเรื่องเพื่อดูสถานะล่าสุด</p>
+        <form id="track-form">
+          <div class="field">
+            <label for="tracking-code">รหัสติดตามเรื่อง</label>
+            <input class="code" id="tracking-code" name="code" placeholder="BBU-XXXXXXXX-XXXXXXXX-XXXXXXXX" maxlength="30" autocomplete="off" autocapitalize="characters" spellcheck="false" required>
+          </div>
+          <div class="actions"><button class="button primary" type="submit">ตรวจสอบสถานะ</button><button class="button secondary" type="button" id="try-code" hidden>ลองรหัสตัวอย่าง</button></div>
+        </form>
+        <div id="track-result" class="result" role="status" hidden></div>
+      </div>
+    </section>
+
+    <section class="view" id="staff" aria-labelledby="staff-title" hidden>
+      <div class="narrow" id="staff-gate">
+        <div class="card panel">
+          <p class="section-label">พื้นที่เจ้าหน้าที่จำลอง</p>
+          <h1 id="staff-title" tabindex="-1">เข้าสู่หน้าเจ้าหน้าที่</h1>
+          <p class="muted">กรอกรหัสทดลองเพื่อเปิดกล่องรับเรื่อง</p>
+          <form id="staff-access-form">
+            <div class="field">
+              <label for="staff-password">รหัสเจ้าหน้าที่</label>
+              <input id="staff-password" type="password" inputmode="numeric" maxlength="5" autocomplete="off" aria-describedby="staff-access-error" required>
+              <p class="error" id="staff-access-error" role="alert" hidden></p>
+            </div>
+            <button class="button primary" type="submit">เข้าสู่หน้าเจ้าหน้าที่</button>
+          </form>
+        </div>
+      </div>
+      <div id="inbox" hidden>
+        <div class="workspace-title">
+          <p class="section-label">พื้นที่เจ้าหน้าที่จำลอง</p><h1 id="inbox-title" tabindex="-1">จัดการเรื่องที่ได้รับ</h1><p class="muted">ทดลองเปิดอ่านเรื่อง มอบหมายผู้รับผิดชอบ และอัปเดตสถานะ</p>
+        </div>
+        <div class="staff-layout">
+          <div class="card inbox-card">
+            <h2>รายการเรื่อง</h2>
+            <div class="field filter"><label for="status-filter">กรองตามสถานะ</label><select id="status-filter"><option value="">ทุกสถานะ</option><option>รับเรื่องแล้ว</option><option>กำลังตรวจสอบ</option><option>ปิดเรื่อง</option></select></div>
+            <div id="report-list"></div>
+          </div>
+          <div class="card inbox-card" id="staff-detail">
+            <p class="muted" id="staff-placeholder">เลือกรายการเพื่อดูรายละเอียด</p>
+            <div id="staff-report" hidden>
+              <p class="section-label" id="staff-code"></p>
+              <h2 id="staff-category" tabindex="-1"></h2>
+              <p id="staff-description" class="incident-text"></p>
+              <dl class="incident-meta"><div><dt>สถานที่</dt><dd id="staff-place"></dd></div><div><dt>วันหรือช่วงเวลา</dt><dd id="staff-when"></dd></div></dl>
+              <form id="staff-form">
+                <div class="field-row">
+                  <div class="field"><label for="assignee">ผู้รับผิดชอบ</label><select id="assignee"><option value="">ยังไม่มอบหมาย</option><option>ทีมดูแลนักเรียน</option><option>ห้องพยาบาล</option><option>ฝ่ายปกครอง</option><option>ฝ่ายอาคารสถานที่</option></select></div>
+                  <div class="field"><label for="staff-status">สถานะ</label><select id="staff-status"><option>รับเรื่องแล้ว</option><option>กำลังตรวจสอบ</option><option>ปิดเรื่อง</option></select></div>
+                </div>
+                <button class="button primary" type="submit">บันทึกการเปลี่ยนแปลง</button>
+              </form>
+            </div>
+            <p class="feedback" id="staff-feedback" role="status"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap footer"><strong>BBU</strong><span>ต้นแบบระบบแจ้งเบาะแสในโรงเรียน</span></footer>
+</body>
+</html>
