@@ -60,6 +60,7 @@ byId('report-form').addEventListener('submit', async (event) => {
   const form = event.currentTarget;
   const button = form.querySelector('button[type=submit]');
   if (button.disabled) return;
+  const buttonLabel = button.textContent;
   showError('report-error', '');
   const fields = new FormData(form);
   const text = details.value.trim();
@@ -83,7 +84,7 @@ byId('report-form').addEventListener('submit', async (event) => {
     return;
   } finally {
     button.disabled = false;
-    button.textContent = 'ส่งเรื่องนิรนาม';
+    button.textContent = buttonLabel;
   }
   byId('receipt-code').value = receiptCode;
   byId('copy-status').textContent = '';

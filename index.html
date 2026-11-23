@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ต้นแบบระบบแจ้งเบาะแสแบบนิรนามของ BBU">
+  <meta name="description" content="ระบบแจ้งเบาะแสแบบนิรนามของ BBU">
   <title>BBU | แจ้งเรื่องนิรนาม</title>
   <link rel="icon" href="BBU.jpg" type="image/jpeg">
   <link rel="stylesheet" href="styles.css">
@@ -28,14 +28,13 @@
   </header>
 
   <main class="wrap" id="content" tabindex="-1">
-    <div class="demo" role="note"><strong>โหมดทดลอง</strong><span id="storage-note">ใช้ข้อมูลสมมติเท่านั้น เรื่องที่ส่งจะเก็บในชีตกลางของ BBU</span></div>
 
     <section class="view" id="report" aria-labelledby="report-title">
       <div class="hero">
         <div class="hero-copy">
           <p class="hero-label"><span></span> ช่องทางรับแจ้งเรื่องของ BBU</p>
           <h1 id="report-title" tabindex="-1">แจ้งเรื่องได้<br><em>โดยไม่ต้องระบุชื่อ</em></h1>
-          <p>ทดลองเล่าเหตุการณ์สมมติในโรงเรียน ตั้งแต่ส่งเรื่องจนถึงติดตามสถานะ</p>
+          <p>แจ้งเหตุการณ์ในโรงเรียนให้เจ้าหน้าที่ทราบ แล้วใช้รหัสติดตามความคืบหน้าได้</p>
         </div>
         <div class="hero-art" aria-hidden="true">
           <div class="orbit orbit-outer"></div><div class="orbit orbit-inner"></div>
@@ -80,7 +79,7 @@
               </div>
             </div>
             <p class="error" id="report-error" role="alert" hidden></p>
-            <button class="button primary" type="submit">ส่งเรื่องนิรนาม</button>
+            <button class="button primary" type="submit">ส่งเรื่อง</button>
           </form>
         </div>
 
@@ -89,7 +88,7 @@
             <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></svg></div>
             <h2>ความเป็นส่วนตัว</h2>
             <p>ฟอร์มไม่ขอชื่อ เลขนักเรียน อีเมล หรือเบอร์โทร</p>
-            <p id="storage-privacy">หน้าเจ้าหน้าที่ต้องใส่รหัสทดลองก่อนเปิดดูเรื่องในระบบ</p>
+            <p id="storage-privacy">หน้าเจ้าหน้าที่ต้องใส่รหัสก่อนเปิดดูเรื่องในระบบ</p>
           </div>
           <div class="card info follow">
             <div class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg></div>
@@ -133,9 +132,9 @@
     <section class="view" id="staff" aria-labelledby="staff-title" hidden>
       <div class="narrow" id="staff-gate">
         <div class="card panel">
-          <p class="section-label">พื้นที่เจ้าหน้าที่จำลอง</p>
+          <p class="section-label">พื้นที่เจ้าหน้าที่</p>
           <h1 id="staff-title" tabindex="-1">เข้าสู่หน้าเจ้าหน้าที่</h1>
-          <p class="muted">กรอกรหัสทดลองเพื่อเปิดกล่องรับเรื่อง</p>
+          <p class="muted">กรอกรหัสเจ้าหน้าที่เพื่อเปิดกล่องรับเรื่อง</p>
           <form id="staff-access-form">
             <div class="field">
               <label for="staff-password">รหัสเจ้าหน้าที่</label>
@@ -148,7 +147,7 @@
       </div>
       <div id="inbox" hidden>
         <div class="workspace-title">
-          <p class="section-label">พื้นที่เจ้าหน้าที่จำลอง</p><h1 id="inbox-title" tabindex="-1">จัดการเรื่องที่ได้รับ</h1><p class="muted">ทดลองเปิดอ่านเรื่อง มอบหมายผู้รับผิดชอบ และอัปเดตสถานะ</p>
+          <p class="section-label">พื้นที่เจ้าหน้าที่</p><h1 id="inbox-title" tabindex="-1">จัดการเรื่องที่ได้รับ</h1><p class="muted">เปิดอ่านเรื่อง มอบหมายผู้รับผิดชอบ และอัปเดตสถานะ</p>
         </div>
         <div class="staff-layout">
           <div class="card inbox-card">
@@ -177,6 +176,6 @@
       </div>
     </section>
   </main>
-  <footer class="wrap footer"><strong>BBU</strong><span>ต้นแบบระบบแจ้งเบาะแสในโรงเรียน</span></footer>
+  <footer class="wrap footer"><strong>BBU</strong><span>ระบบแจ้งเบาะแสในโรงเรียน</span></footer>
 </body>
 </html>

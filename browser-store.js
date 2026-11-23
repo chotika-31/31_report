@@ -2,10 +2,6 @@ const demoCode = '';
 const reportStore = (() => {
   let pending;
 
-  if (!window.BBU_APPS_SCRIPT_URL) {
-    document.getElementById('storage-note').textContent = 'เว็บทดลองยังไม่ได้เชื่อมฐานข้อมูลกลาง';
-  }
-
   async function call(method, ...args) {
     const url = new URL(window.BBU_APPS_SCRIPT_URL);
     if (url.origin !== 'https://script.google.com' || !/^\/macros\/s\/[\w-]+\/exec$/.test(url.pathname)) {
